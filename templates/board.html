@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>게시판</title>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="navbar">🍯 Honey community</div>
+
+<div class="board-container">
+
+<h2 style="color:orange;"> 🗯️ 꿀사모 커뮤니티</h2>
+
+<!-- 검색 -->
+<form method="GET">
+    <input type="text" name="q" placeholder="검색어 입력">
+    <button type="submit">검색</button>
+</form>
+
+<hr>
+
+<!-- 글 작성 -->
+<form method="POST">
+    <input type="text" name="title" placeholder="제목">
+    <textarea name="content" placeholder="내용"></textarea>
+    <button type="submit">글 작성</button>
+</form>
+
+<hr>
+
+<!-- 게시글 리스트 -->
+{% if posts %}
+    {% for post in posts %}
+    <div class="post-card">
+        <h3> {{ post.title }}</h3>
+        <p>{{ post.content }}</p>
+
+        <div>
+            <a href="/edit/{{ loop.index0 }}">✏️ 수정</a>
+            <a href="/delete/{{ loop.index0 }}">❌ 삭제</a>
+        </div>
+
+        <form action="/comment/{{ loop.index0 }}" method="POST">
+            <input type="text" name="comment" placeholder="댓글을 입력하세요..." required>
+            <button type="submit">댓글 작성</button>
+        </form>
+
+        {% for c in post.comments %}
+            <div class="comment">🐝 {{ c }}</div>
+        {% endfor %}
+    </div>
+    <hr>
+    {% endfor %}
+{% else %}
+    <p style="text-align:center; color:#888;">아직 글이 없습니다 🐝</p>
+{% endif %}
+<br>
+
+<div style="margin-top:20px;">
+    <a href="/chatbot">🤖 챗봇</a>
+    <a href="/">🚪 로그아웃</a>
+</div>
+
+</body>
+</html>

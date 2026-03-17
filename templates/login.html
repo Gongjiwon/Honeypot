@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>꿀사모 | Honey Community</title>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
+    <!-- 기존 CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="navbar">
+    🍯 꿀사모 <span>Honey Community</span>
+</div>
+
+
+<div class="login-box">
+
+<h2 class="title">
+    🍯 꿀사모
+    <span>(꿀을 사랑하는 모임)</span>
+</h2>
+    <p> 최고의 꿀을 찾아서..~</p>
+
+    <form action="/login" method="POST">
+        <input type="text" name="username" placeholder="아이디">
+        <input type="password" name="password" placeholder="비밀번호">
+        <button type="submit">로그인</button>
+    </form>
+
+</div>
+
+</body>
+</html>
